@@ -1,0 +1,1 @@
+enum GymUserLoginStatus { isLoggedIn, isNotLoggedIn }

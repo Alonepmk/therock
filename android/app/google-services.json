@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "362357087062",
+    "project_id": "the-rock-f51ce",
+    "storage_bucket": "the-rock-f51ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362357087062:android:16c3ca3381df4b6a9814f7",
+        "android_client_info": {
+          "package_name": "com.gym.therock"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPjdPyXto416bX5LroHX5OnjCAprXDjkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
