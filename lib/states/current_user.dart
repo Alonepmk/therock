@@ -46,6 +46,7 @@ class CurrentUser extends ChangeNotifier {
         GymUser(); //build an instance of gym user model for data storage
 
     try {
+      print("inside of sign up");
       UserCredential signUpAuthResult = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
 
@@ -74,6 +75,7 @@ class CurrentUser extends ChangeNotifier {
     try {
       UserCredential authResult = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+
       _currentUser = await GymUserDBService().getUserInfo(authResult.user!.uid);
 
       if ((_currentUser.uid != null) &&

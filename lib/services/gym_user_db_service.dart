@@ -369,6 +369,12 @@ class GymUserDBService {
         .set({"trainnerUid": "", "trainnerName": ""}, SetOptions(merge: true));
   }
 
+  static Future emptyAccountData(String? uid) async {
+    await _firestore.collection("users").doc(uid).set(
+        {"accountCreated": "", "email": "", "role": "deleted"},
+        SetOptions(merge: true));
+  }
+
   static Future removeAllActivitiesFromUser(String? uid) async {
     // dangerous ********************************************
     // try {

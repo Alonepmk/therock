@@ -1,6 +1,10 @@
 // ignore_for_file: file_names, use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
 import 'package:therock/models/return_string_carrier.dart';
 import 'package:therock/states/current_user.dart';
 import 'package:therock/utils/loading_dialog.dart';
@@ -16,6 +20,12 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  @override
+  void didChangeDependencies() {
+    Navigator.of(context);
+    super.didChangeDependencies();
+  }
+
   double screenWidth = 0;
   double screenHeight = 0;
 
@@ -28,23 +38,101 @@ class _SignUpFormState extends State<SignUpForm> {
   TextEditingController confirmPasswordController = TextEditingController();
   ReturnDataString rds = ReturnDataString();
 
-  void _signUpUser(String email, String password, BuildContext context,
+  sendMail(String email, String password, BuildContext context,
       String fullName) async {
     showLoadingDialogUtil(context);
+    String username = "gymtherock2023@gmail.com";
+    String onetime = "klevihtjrowlvgcw";
+
+    var rng = Random();
+    var code = rng.nextInt(900000) + 100000;
+
+    print(code);
+
+    final smtpServer = gmail(username, onetime);
+
+    final message = Message()
+      ..from = Address(username)
+      ..recipients.add(email)
+      ..subject = "Confirmation Code"
+      ..html =
+          "<h3>Please use the below code to complete the registration</h3><br><center><h2>$code </h2><center><br/><h4>Best Regard,<br/>The Rock Gym And FitnessClub</h4>";
+
+    try {
+      SendReport report = await send(message, smtpServer);
+      print(report);
+      _askConfirmationCode(code.toString(), email, password, context, fullName);
+    } on MailerException catch (e) {
+      scaffoldUtil(context, e.toString(), 1);
+    }
+  }
+
+  void _askConfirmationCode(String code, String email, String password,
+      BuildContext context, String fullName) {
+    Navigator.pop(context);
+    TextEditingController textFieldController = TextEditingController();
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('OPT Confirmation'),
+          content: TextField(
+            controller: textFieldController,
+            decoration: const InputDecoration(
+                hintText:
+                    "Please Enter the confirmation Code sent to your email"),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('cancle'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: const Text('Proceed'),
+              onPressed: () async {
+                FocusManager.instance.primaryFocus?.unfocus();
+                print(textFieldController.text);
+                if (textFieldController.text == code) {
+                  // Navigator.pop(context);
+                  showLoadingDialogUtil(context);
+                  scaffoldUtil(context, "Sign Up Processing, please Wait", 2);
+                  print(
+                      "the account is going to proceed ________---------++++++++++*****");
+                  _signUpUser(email, password, context, fullName);
+                } else {
+                  scaffoldUtil(context, "The Opt Code is Wrong", 2);
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _signUpUser(String email, String password, BuildContext context,
+      String fullName) async {
+    //showLoadingDialogUtil(context);
 
     CurrentUser currentUser = Provider.of<CurrentUser>(context, listen: false);
 
     try {
       rds = await currentUser.signUpUser(
           email, password, fullName); //call provider to sign up the user
+      print("the rds message is 0000000000000000000000 ${rds.status}");
 
       if (rds.status == "success") {
         Navigator.pop(context);
-        scaffoldUtil(context, rds.message!, 3);
         Navigator.pop(context);
+        Navigator.pop(context);
+        scaffoldUtil(context, rds.message!, 3);
       } else {
-        scaffoldUtil(context, rds.message!, 3);
         Navigator.pop(context);
+        Navigator.pop(context);
+        scaffoldUtil(context, rds.message!, 3);
       }
     } catch (e) {
       // ignore: avoid_print
@@ -203,13 +291,30 @@ class _SignUpFormState extends State<SignUpForm> {
             width: screenWidth / 3,
             height: screenHeight / 16,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
-                if (passwordController.text == confirmPasswordController.text) {
-                  _signUpUser(emailController.text, passwordController.text,
-                      context, fullNameController.text);
+                if (fullNameController.text.isEmpty) {
+                  scaffoldUtil(context, "FullName is required", 1);
+                } else if (emailController.text.isEmpty) {
+                  scaffoldUtil(context, "Email is required", 1);
+                } else if (passwordController.text.isEmpty) {
+                  scaffoldUtil(context, "Password is required", 1);
+                } else if (confirmPasswordController.text.isEmpty) {
+                  scaffoldUtil(context, "Confirm Password is required", 1);
                 } else {
-                  scaffoldUtil(context, "Password Do Not Match", 3);
+                  if (passwordController.text ==
+                      confirmPasswordController.text) {
+                    // _signUpUser(emailController.text, passwordController.text,
+                    //     context, fullNameController.text);
+
+                    await sendMail(
+                        emailController.text,
+                        passwordController.text,
+                        context,
+                        fullNameController.text);
+                  } else {
+                    scaffoldUtil(context, "Password Do Not Match", 3);
+                  }
                 }
               },
               style: ButtonStyle(

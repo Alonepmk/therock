@@ -6,8 +6,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:therock/extensions.dart';
 import 'package:therock/models/gym_user.dart';
+import 'package:therock/screens/user_screens/member_shared_screens/account_setting.dart';
 import 'package:therock/services/gym_user_db_service.dart';
 import 'package:therock/utils/function_utils.dart';
 import 'package:therock/utils/loading_dialog.dart';
@@ -446,6 +448,54 @@ class _MemberProfileState extends State<MemberProfile> {
                 ],
               ),
             ),
+          ),
+          Column(
+            children: [
+              Text(
+                "Account Setting",
+                style: TextStyle(
+                  fontSize: screenWidth / 80,
+                  color: Colors.white,
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.settings),
+                color: Colors.white,
+                tooltip: 'Log Out',
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AlertDialog(
+                        title: const Text('Confirmation'),
+                        content: const SingleChildScrollView(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                      "!You sure want to Proceed to Account Setting?")),
+                            ],
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              Get.to(() => const AccountSetting());
+                            },
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),

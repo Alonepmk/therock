@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:therock/extensions.dart';
 import 'package:therock/utils/calculate_bmi.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum Gender {
   male,
@@ -421,6 +422,19 @@ class _CuBmiState extends State<CuBmi> {
                     ),
                   ],
                 ),
+                TextButton(
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                  ),
+                  onPressed: () {
+                    _launchURL();
+                  },
+                  child: const Text(
+                    "We calculate BMI by using the method used by NIH (National Heart, Lung and Blood Institute), click here for more information",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 10),
+                  ),
+                ),
                 GestureDetector(
                   onTap: () {
                     CalculateResult obj = CalculateResult(weight, height);
@@ -476,6 +490,18 @@ class _CuBmiState extends State<CuBmi> {
                   textAlign: TextAlign.center,
                   "Your BMI is $result. $des",
                 ),
+                TextButton(
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.blueGrey),
+                  ),
+                  onPressed: () {
+                    _launchURL();
+                  },
+                  child: const Text(
+                    "We calculate BMI by using the method used by NIH (National Heart, Lung and Blood Institute), click here for more information",
+                    style: TextStyle(fontSize: 10),
+                  ),
+                ),
               ],
             ),
           ),
@@ -488,5 +514,13 @@ class _CuBmiState extends State<CuBmi> {
         );
       },
     );
+  }
+
+  _launchURL() async {
+    final Uri url = Uri.parse(
+        'https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }
