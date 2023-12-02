@@ -41,8 +41,8 @@ class _SignUpFormState extends State<SignUpForm> {
   sendMail(String email, String password, BuildContext context,
       String fullName) async {
     showLoadingDialogUtil(context);
-    String username = "gymtherock2023@gmail.com";
-    String onetime = "klevihtjrowlvgcw";
+    String username = "therockgym555@gmail.com";
+    String onetime = "wraheaialiqsfvvv";
 
     var rng = Random();
     var code = rng.nextInt(900000) + 100000;
