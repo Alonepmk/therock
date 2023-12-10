@@ -49,6 +49,42 @@ class CurrentUser extends ChangeNotifier {
       print("inside of sign up");
       UserCredential signUpAuthResult = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.signOut();
+
+      user.uid = signUpAuthResult.user!.uid;
+      user.email = signUpAuthResult.user!.email;
+      user.fullName = fullName;
+      user.isLogin = describeEnum(GymUserLoginStatus.isNotLoggedIn);
+      user.role = describeEnum(GymUserRole.guest);
+
+      String returnString = await GymUserDBService().createGymUser(user);
+      if (returnString == "success") {
+        rds.status = "success";
+        rds.message = "Successfully Sign Up";
+      }
+    } catch (e) {
+      rds.message = e.toString();
+    }
+
+    return rds;
+  }
+
+  Future<ReturnDataString> adminCreateANewUser(
+      String email, String password, String fullName) async {
+    ReturnDataString rds = ReturnDataString();
+    rds.status = "error";
+    GymUser user =
+        GymUser(); //build an instance of gym user model for data storage
+
+    try {
+      print("inside of sign up");
+      UserCredential signUpAuthResult = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      await FirebaseAuth.instance.signOut();
+
+      await _auth.signInWithEmailAndPassword(
+          email: "yar@gmail.com", password: "123456");
 
       user.uid = signUpAuthResult.user!.uid;
       user.email = signUpAuthResult.user!.email;

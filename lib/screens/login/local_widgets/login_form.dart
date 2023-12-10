@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:therock/models/return_string_carrier.dart';
+import 'package:therock/screens/forget_password/forget_password.dart';
 import 'package:therock/screens/root/root.dart';
 import 'package:therock/screens/signup/signup.dart';
 import 'package:therock/states/current_user.dart';
@@ -171,8 +172,8 @@ class _LoginFormState extends State<LoginForm> {
             child: ElevatedButton(
               onPressed: () {
                 FocusManager.instance.primaryFocus?.unfocus();
-                _loginUser(
-                    emailController.text, passwordController.text, context);
+                _loginUser(emailController.text.toLowerCase().trim(),
+                    passwordController.text, context);
               },
               style: ButtonStyle(
                 backgroundColor:
@@ -186,38 +187,37 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          // ElevatedButton(
-          //   child: const Padding(
-          //     padding: EdgeInsets.symmetric(horizontal: 100),
-          //     child: Text(
-          //       "Log In",
-          //       style: TextStyle(
-          //         color: Colors.white,
-          //         fontWeight: FontWeight.bold,
-          //         fontSize: 20.0,
-          //       ),
-          //     ),
-          //   ),
-          //   onPressed: () {
-          //     FocusManager.instance.primaryFocus?.unfocus();
-          //     _loginUser(
-          //         emailController.text, passwordController.text, context);
-          //   },
-          // ),
-
-          TextButton(
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStateProperty.all(Colors.blueGrey.shade400),
+          const SizedBox(height: 12),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ForgetPassword(),
+                ),
+              );
+            },
+            child: Text(
+              "Forget Password?",
+              style: TextStyle(
+                color: Colors.blueGrey.shade400,
+              ),
             ),
-            onPressed: () {
+          ),
+          const SizedBox(height: 6),
+          GestureDetector(
+            onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const SignUp(),
                 ),
               );
             },
-            child: const Text("Don't have an account? Sign up here"),
+            child: Text(
+              "Don't have an account? Sign up here",
+              style: TextStyle(
+                color: Colors.blueGrey.shade400,
+              ),
+            ),
           ),
         ],
       ),

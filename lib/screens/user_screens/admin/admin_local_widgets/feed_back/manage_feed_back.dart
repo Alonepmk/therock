@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -604,7 +604,7 @@ class _ManageFeedBackState extends State<ManageFeedBack> {
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 if (paramTextBoxController.text.isNotEmpty) {
                                   doSearchAndInitFeedBack(
-                                      paramTextBoxController.text);
+                                      paramTextBoxController.text.trim());
                                 } else {
                                   scaffoldUtil(context,
                                       "Search Data Must not be empty", 1);
@@ -691,7 +691,6 @@ class _ManageFeedBackState extends State<ManageFeedBack> {
                                             .format(value);
                                       }
                                     });
-                                    print(date);
                                   }
                                 });
                               },
@@ -730,7 +729,7 @@ class _ManageFeedBackState extends State<ManageFeedBack> {
                                     date != "fullDate" &&
                                     date != "") {
                                   doSearchAndInitFeedBack(
-                                      paramTextBoxController.text);
+                                      paramTextBoxController.text.trim());
                                 } else {
                                   scaffoldUtil(context,
                                       "Search Data Must not be empty", 1);
@@ -829,7 +828,6 @@ class _ManageFeedBackState extends State<ManageFeedBack> {
                                         date = DateFormat('yyyy').format(value);
                                       }
                                     });
-                                    print(date);
                                   }
                                 });
                               },
@@ -868,9 +866,8 @@ class _ManageFeedBackState extends State<ManageFeedBack> {
                                     date != "fullDate" &&
                                     date != "" &&
                                     paramTextBoxController.text.isNotEmpty) {
-                                  print(date + "hello hello");
                                   doSearchAndInitFeedBack(
-                                      paramTextBoxController.text);
+                                      paramTextBoxController.text.trim());
                                 } else {
                                   scaffoldUtil(context,
                                       "Search Data Must not be empty", 1);

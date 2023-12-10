@@ -101,8 +101,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   scaffoldUtil(context, "Sign Up Processing, please Wait", 2);
                   print(
                       "the account is going to proceed ________---------++++++++++*****");
-                  _signUpUser(email.toLowerCase(), password, context,
-                      fullName.toLowerCase());
+                  _signUpUser(email.toLowerCase().trim(), password, context,
+                      fullName.toLowerCase().trim());
                 } else {
                   scaffoldUtil(context, "The Opt Code is Wrong", 2);
                 }

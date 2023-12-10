@@ -145,6 +145,18 @@ class GymUserDBService {
         .update({"isLogin": loginStatus});
   }
 
+  static Future<List<GymUser>> readPasswordResetUserByEmail(String email) {
+    final userCollection = FirebaseFirestore.instance.collection("users");
+    return userCollection
+        .where('email', isEqualTo: email)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((DocumentSnapshot doc) => GymUser.fromSnapshot(doc))
+          .toList();
+    });
+  }
+
   static Future updateUser(GymUser? gymUser) async {
     await _firestore.collection("users").doc(gymUser!.uid).update(
       {

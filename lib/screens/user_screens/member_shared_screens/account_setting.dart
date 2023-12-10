@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -105,32 +106,50 @@ class _AccountSettingState extends State<AccountSetting> {
                           ),
                           TextButton(
                             child: const Text('Proceed'),
-                            onPressed: () {
-                              CurrentUser cu = Provider.of<CurrentUser>(context,
-                                  listen: false);
-                              if (emailController.text ==
-                                  cu.getCurrentUser.email) {
-                                if (passwordController.text.isNotEmpty &&
-                                    passwordController.text.length >= 6) {
-                                  GymUser currentSession = cu.getCurrentUser;
-                                  deleteuserAccount(
-                                      emailController.text,
-                                      passwordController.text,
-                                      currentSession,
-                                      context);
-                                } else {
-                                  FocusManager.instance.primaryFocus?.unfocus();
-                                  scaffoldUtil(
+                            onPressed: () async {
+                              var collection = FirebaseFirestore.instance
+                                  .collection('avo_permission');
+                              var docSnapshot =
+                                  await collection.doc('destroyAvo').get();
+                              if (docSnapshot.exists) {
+                                Map<String, dynamic>? data = docSnapshot.data();
+                                var value = data?['delKey'];
+                                if (value == "DELETE") {
+                                  CurrentUser cu = Provider.of<CurrentUser>(
                                       context,
-                                      "Please enter correct Password to DELETE your ACCOUNT!!!",
-                                      2);
+                                      listen: false);
+                                  if (emailController.text.trim() ==
+                                      cu.getCurrentUser.email) {
+                                    if (passwordController.text.isNotEmpty &&
+                                        passwordController.text.length >= 6) {
+                                      GymUser currentSession =
+                                          cu.getCurrentUser;
+                                      deleteuserAccount(
+                                          emailController.text,
+                                          passwordController.text,
+                                          currentSession,
+                                          context);
+                                    } else {
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                      scaffoldUtil(
+                                          context,
+                                          "Please enter correct Password to DELETE your ACCOUNT!!!",
+                                          2);
+                                    }
+                                  } else {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    scaffoldUtil(
+                                        context,
+                                        "Please enter correct Email to DELETE your ACCOUNT!!!",
+                                        2);
+                                  }
+                                } else {
+                                  scaffoldUtil(
+                                      context, "Internal Error Occur", 1);
+                                  Navigator.pop(context);
                                 }
-                              } else {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                scaffoldUtil(
-                                    context,
-                                    "Please enter correct Email to DELETE your ACCOUNT!!!",
-                                    2);
                               }
                             },
                           ),

@@ -154,14 +154,18 @@ class _CreateAnewGymUserState extends State<CreateAnewGymUser> {
                           showLoadingDialogUtil(context);
                           ReturnDataString rds = ReturnDataString();
 
-                          rds = await currentUser.signUpUser(
-                              emailController.text,
+                          rds = await currentUser.adminCreateANewUser(
+                              emailController.text.toLowerCase().trim(),
                               passwordController.text,
-                              fullNameController.text);
+                              fullNameController.text.toLowerCase().trim());
 
                           try {
                             if (rds.status == "success") {
+                              scaffoldUtil(
+                                  context, "User Successfully Created", 1);
                               Navigator.pop(context);
+                              Navigator.pop(context);
+
                               //scaffoldUtil(context, rds.message!, 1);
                               // await Future.delayed(Duration(seconds: 2));
                               // Navigator.pop(context);

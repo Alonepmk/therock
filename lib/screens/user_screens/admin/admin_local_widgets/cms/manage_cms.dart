@@ -24,7 +24,7 @@ class _ManageCmsState extends State<ManageCms> {
           children: [
             Align(
               child: Text(
-                "Manage Gym User",
+                "Manage Gym CMS",
                 style: TextStyle(
                   fontSize: screenWidth / 25,
                   color: Colors.white,

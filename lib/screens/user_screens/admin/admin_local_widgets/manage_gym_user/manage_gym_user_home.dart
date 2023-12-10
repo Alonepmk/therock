@@ -198,7 +198,8 @@ class _ManageGymUserState extends State<ManageGymUser> {
                                                 .text.length >=
                                             4) {
                                           doSearchAndInitUser(
-                                              paramTextBoxController.text);
+                                              paramTextBoxController.text
+                                                  .trim());
                                         } else {
                                           scaffoldUtil(
                                               context,
@@ -207,7 +208,7 @@ class _ManageGymUserState extends State<ManageGymUser> {
                                         }
                                       } else {
                                         doSearchAndInitUser(
-                                            paramTextBoxController.text);
+                                            paramTextBoxController.text.trim());
                                       }
                                     } else {
                                       scaffoldUtil(context,
@@ -256,7 +257,7 @@ class _ManageGymUserState extends State<ManageGymUser> {
                           padding: const EdgeInsets.all(8.0),
                           child: searchResult.isNotEmpty
                               ? const Text("Search Result")
-                              : const Text("No Search has been made yet!"),
+                              : const Text("No Search Data Found!"),
                         ),
                         const Divider(),
                         searchResult.isNotEmpty
