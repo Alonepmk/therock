@@ -13,7 +13,7 @@ class BoxContainerUtilLoginSignup extends StatelessWidget {
         color: Colors.grey.shade900,
         boxShadow: const [
           BoxShadow(
-            color: Colors.black,
+            color: Colors.tealAccent,
             blurRadius: 2.0,
             spreadRadius: 0.0,
             //offset: Offset(2.0, 2.0), // shadow direction: bottom right

@@ -1,23 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:therock/models/feedback.dart';
 import 'package:therock/models/program.dart';
 
 class FeedbackDBService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  static Future<String> createFeedBack(Feedback feedback) async {
-    String retVal = "error";
+  static Future<List<UserFeedback>> readFeedbackByParam(
+      String paramField, String paramSearch) {
+    final userCollection = FirebaseFirestore.instance.collection("feedback");
+    return userCollection
+        .where(paramField, isEqualTo: paramSearch)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((DocumentSnapshot doc) => UserFeedback.fromSnapshot(doc))
+          .toList();
+    });
+  }
 
-    try {
-      await FirebaseFirestore.instance.collection("feedbacks").doc().set({
-        'feedBackCreatedDate': Timestamp.now(),
-      }); //insert sign up user record to firestore db
-      retVal = "success";
-    } catch (e) {
-      retVal = e.toString();
-    }
-
-    return retVal;
+  static Future<List<UserFeedback>> readFeedbackByTwoParam(String paramFieldOne,
+      String paramFieldTwo, String paramSearchOne, String paramSearchTwo) {
+    final userCollection = FirebaseFirestore.instance.collection("feedback");
+    return userCollection
+        .where(paramFieldOne, isEqualTo: paramSearchOne)
+        .where(paramFieldTwo, isEqualTo: paramSearchTwo)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((DocumentSnapshot doc) => UserFeedback.fromSnapshot(doc))
+          .toList();
+    });
   }
 
   static Stream<List<Program>> read() {

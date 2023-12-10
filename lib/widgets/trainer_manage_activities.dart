@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:therock/extensions.dart';
-import 'package:therock/screens/user_screens/current_user/cu_local_widgets/cu_bmi/cu_bmi.dart';
+import 'package:therock/screens/user_screens/current_user/cu_local_widgets/cu_bmr/cu_bmi.dart';
 import 'package:therock/screens/user_screens/trainer/trainer_local_widgets/manage_gymuser_activities/manage_gymuser_activities.dart';
 import 'package:therock/utils/text_theme.dart';
 

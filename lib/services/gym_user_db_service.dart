@@ -249,6 +249,57 @@ class GymUserDBService {
             querySnapshot.docs.map((e) => GymUser.fromSnapshot(e)).toList());
   }
 
+  // static Stream<List<GymUser>> readUserByEmailOrNamess(
+  //     String name, String email) {
+  //   final userCollection = FirebaseFirestore.instance.collection("users");
+  //   return userCollection
+  //       .where('role', isNotEqualTo: "admin")
+  //       .where(Filter.or(Filter('fullName', isGreaterThanOrEqualTo: name),
+  //           Filter('email', isGreaterThanOrEqualTo: email)))
+  //       .snapshots()
+  //       .map((querySnapshot) =>
+  //           querySnapshot.docs.map((e) => GymUser.fromSnapshot(e)).toList());
+  // }
+
+  static Future<List<GymUser>> readUserByName(String name) {
+    final userCollection = FirebaseFirestore.instance.collection("users");
+    return userCollection
+        .where('fullName', isGreaterThanOrEqualTo: name)
+        .where('fullName', isLessThanOrEqualTo: '$name~')
+        .get()
+        .then((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((DocumentSnapshot doc) => GymUser.fromSnapshot(doc))
+          .toList();
+    });
+  }
+
+  static Future<List<GymUser>> readUserByEmail(String email) {
+    final userCollection = FirebaseFirestore.instance.collection("users");
+    return userCollection
+        .where('email', isGreaterThanOrEqualTo: email)
+        .where('email', isLessThanOrEqualTo: '$email~')
+        .get()
+        .then((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((DocumentSnapshot doc) => GymUser.fromSnapshot(doc))
+          .toList();
+    });
+  }
+
+  static Future<List<GymUser>> readUserByPhone(String phone) {
+    final userCollection = FirebaseFirestore.instance.collection("users");
+    return userCollection
+        .where('phoneNumber', isGreaterThanOrEqualTo: phone)
+        .where('phoneNumber', isLessThanOrEqualTo: '$phone~')
+        .get()
+        .then((QuerySnapshot snapshot) {
+      return snapshot.docs
+          .map((DocumentSnapshot doc) => GymUser.fromSnapshot(doc))
+          .toList();
+    });
+  }
+
   Future<GymUser> getUserInfoByInitState() async {
     GymUser retVal = GymUser();
 

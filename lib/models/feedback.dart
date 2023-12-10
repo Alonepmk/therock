@@ -1,55 +1,79 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Feedback {
+class UserFeedback {
   String? fid;
-  String? uid;
-  String? fullName;
+  String? currentMembershipName;
+  Timestamp? createdDate;
   String? email;
-  String? phoneNumber;
-  String? membershipType;
-  String? subject;
-  String? message;
-  String? flag;
-  Timestamp? feedBackCreatedDate;
+  String? fullDate;
+  String? fullName;
+  String? hasTrainer;
+  String? month;
+  String? negative;
+  String? other;
+  String? positive;
+  String? rating;
+  String? service;
+  String? trainer;
+  String? uid;
+  String? year;
 
-  Feedback(
+  UserFeedback(
       {this.fid,
-      this.uid,
-      this.fullName,
+      this.currentMembershipName,
+      this.createdDate,
       this.email,
-      this.phoneNumber,
-      this.membershipType,
-      this.subject,
-      this.message,
-      this.flag,
-      this.feedBackCreatedDate});
+      this.fullDate,
+      this.fullName,
+      this.hasTrainer,
+      this.month,
+      this.negative,
+      this.other,
+      this.positive,
+      this.rating,
+      this.service,
+      this.trainer,
+      this.uid,
+      this.year});
 
-  factory Feedback.fromSnapshot(DocumentSnapshot snap) {
+  factory UserFeedback.fromSnapshot(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
-    return Feedback(
+    return UserFeedback(
       fid: snap.id,
-      uid: snapshot['uid'],
-      fullName: snapshot['fullName'],
+      currentMembershipName: snapshot['currentMembershipName'],
+      createdDate: snapshot['createdDate'],
       email: snapshot['email'],
-      phoneNumber: snapshot['phoneNumber'],
-      membershipType: snapshot['membershipType'],
-      subject: snapshot['subject'],
-      message: snapshot['message'],
-      flag: snapshot['flag'],
-      feedBackCreatedDate: snapshot['feedBackCreatedDate'],
+      fullDate: snapshot['fullDate'],
+      fullName: snapshot['fullName'],
+      hasTrainer: snapshot['hasTrainer'],
+      month: snapshot['month'],
+      negative: snapshot['negative'],
+      other: snapshot['other'],
+      positive: snapshot['positive'],
+      rating: snapshot['rating'],
+      service: snapshot['service'],
+      trainer: snapshot['trainer'],
+      uid: snapshot['uid'],
+      year: snapshot['year'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         "fid": fid,
-        "uid": uid,
-        "fullName": fullName,
+        "currentMembershipName": currentMembershipName,
+        "createdDate": createdDate,
         "email": email,
-        "phoneNumber": phoneNumber,
-        "membershipType": membershipType,
-        "subject": subject,
-        "message": message,
-        "flag": flag,
-        "feedBackCreatedDate": feedBackCreatedDate,
+        "fullDate": fullDate,
+        "membershipType": fullName,
+        "subject": hasTrainer,
+        "message": month,
+        "flag": negative,
+        "other": other,
+        "positive": positive,
+        "rating": rating,
+        "service": service,
+        "trainer": trainer,
+        "uid": uid,
+        "year": year,
       };
 }

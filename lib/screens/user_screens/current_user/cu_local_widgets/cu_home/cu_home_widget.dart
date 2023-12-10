@@ -5,6 +5,7 @@ import 'package:therock/utils/text_theme.dart';
 import 'package:therock/widgets/about_us_card.dart';
 import 'package:therock/widgets/attandance_card.dart';
 import 'package:therock/widgets/bmi_card.dart';
+import 'package:therock/widgets/bmr_card.dart';
 import 'package:therock/widgets/membership_card.dart';
 import 'package:therock/widgets/program_card.dart';
 import 'package:therock/widgets/view_trainer_card.dart';
@@ -111,11 +112,12 @@ class _CurrentUserHomeWidgetState extends State<CurrentUserHomeWidget> {
                 ),
                 scrollDirection: Axis.vertical,
                 children: const [
-                  BmiCard(),
+                  BmrCard(),
                   ProgramCard(),
                   AttandanceCard(),
                   MembershipCard(),
                   ViewTrainerCard(),
+                  BmiCard(),
                   AboutUsCard(),
                 ],
               ),

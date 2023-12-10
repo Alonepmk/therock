@@ -5,6 +5,7 @@ import 'package:therock/screens/user_screens/admin/admin_home.dart';
 import 'package:therock/screens/user_screens/current_user/current_user_home.dart';
 import 'package:therock/screens/user_screens/guest/guest_home.dart';
 import 'package:therock/screens/user_screens/past_user/past_user_home.dart';
+import 'package:therock/screens/user_screens/receptionist/receptionist_home.dart';
 import 'package:therock/screens/user_screens/trainer/trainer_home.dart';
 import 'package:therock/states/current_user.dart';
 import 'package:provider/provider.dart';
@@ -72,6 +73,9 @@ class _OurRootState extends State<OurRoot> {
           } else if ((_authStatus == AuthStatus.loggedIn) &&
               (hasUser.data!.role == "guest")) {
             retVal = const GuestHome();
+          } else if ((_authStatus == AuthStatus.loggedIn) &&
+              (hasUser.data!.role == "receptionist")) {
+            retVal = const ReceptionistHome();
           } else {
             retVal = const Login(); //_authStatus == AuthStatus.notLoggedIn
           }

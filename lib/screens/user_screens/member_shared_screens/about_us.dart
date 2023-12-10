@@ -39,23 +39,15 @@ class _AboutUsState extends State<AboutUs> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              const SizedBox(height: 20.0),
               // Gym Logo
               Image.asset(
-                'assets/branding-logo.png', // Replace with your gym logo image
+                'assets/branding-logo-2.png', // Replace with your gym logo image
                 width: 250,
                 height: 250,
                 fit: BoxFit.fill,
               ),
 
-              // Gym Name and Description
-              const Text(
-                'Fitness World Gym',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue, // Change to your app's theme color
-                ),
-              ),
               const SizedBox(height: 8.0),
               const Text(
                 'Your Fitness Journey Starts Here!',
@@ -73,7 +65,7 @@ class _AboutUsState extends State<AboutUs> {
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue, // Change to your app's theme color
+                  color: Colors.white, // Change to your app's theme color
                 ),
               ),
               const Text(
@@ -91,7 +83,7 @@ class _AboutUsState extends State<AboutUs> {
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue, // Change to your app's theme color
+                  color: Colors.white, // Change to your app's theme color
                 ),
               ),
               const Text(
@@ -110,7 +102,7 @@ class _AboutUsState extends State<AboutUs> {
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue, // Change to your app's theme color
+                  color: Colors.white, // Change to your app's theme color
                 ),
               ),
               const Text(

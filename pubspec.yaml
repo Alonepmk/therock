@@ -105,12 +105,15 @@ flutter:
     - assets/app-banner/
     - assets/image-icons/
     - assets/image-icons/bmi_icon.jpg
+    - assets/image-icons/bmr_icon.jpeg
     - assets/image-icons/attandance_icon.jpg
     - assets/image-icons/program_icon.jpg
     - assets/image-icons/membership_icon.jpg
     - assets/image-icons/trainer_icon.jpg
     - assets/logo.png
     - assets/branding-logo.png
+    - assets/branding-logo-2.png
+    - assets/branding-logo-3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

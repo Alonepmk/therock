@@ -21,7 +21,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
-    screenWidth = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
     CurrentUser currentUser = Provider.of<CurrentUser>(context, listen: false);
 
     return SafeArea(
@@ -36,7 +36,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                   child: Text(
                     "Attandance",
                     style: TextStyle(
-                      fontSize: screenWidth / 40,
+                      fontSize: screenWidth / 22,
                       color: Colors.white,
                     ),
                   ),
@@ -59,7 +59,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                         _month,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: screenWidth / 40,
+                          fontSize: screenWidth / 22,
                         ),
                       ),
                     ),
@@ -80,8 +80,8 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: SizedBox(
-                                    height: 500,
-                                    width: 900,
+                                    height: screenHeight / 1.3,
+                                    width: screenWidth,
                                     child: child,
                                   ),
                                 ),
@@ -101,7 +101,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                             "Pick a Month",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: screenWidth / 40,
+                              fontSize: screenWidth / 22,
                             ),
                           ),
                         ),
@@ -171,7 +171,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                                                     snap[index]['date']
                                                         .toDate()),
                                                 style: TextStyle(
-                                                  fontSize: screenWidth / 50,
+                                                  fontSize: screenWidth / 24,
                                                   color: Colors.white54,
                                                 ),
                                               ),
@@ -190,7 +190,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                                               child: Text(
                                                 "Check In",
                                                 style: TextStyle(
-                                                  fontSize: screenWidth / 50,
+                                                  fontSize: screenWidth / 28,
                                                   color: Colors.white54,
                                                 ),
                                               ),
@@ -199,7 +199,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                                               child: Text(
                                                 snap[index]['checkIn'],
                                                 style: TextStyle(
-                                                  fontSize: screenWidth / 50,
+                                                  fontSize: screenWidth / 30,
                                                   color: Colors.white54,
                                                 ),
                                               ),
@@ -218,7 +218,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                                               child: Text(
                                                 "Check Out",
                                                 style: TextStyle(
-                                                  fontSize: screenWidth / 50,
+                                                  fontSize: screenWidth / 28,
                                                   color: Colors.white54,
                                                 ),
                                               ),
@@ -227,7 +227,7 @@ class _CuViewAttandanceState extends State<CuViewAttandance> {
                                               child: Text(
                                                 snap[index]['checkOut'],
                                                 style: TextStyle(
-                                                  fontSize: screenWidth / 50,
+                                                  fontSize: screenWidth / 30,
                                                   color: Colors.white54,
                                                 ),
                                               ),

@@ -22,8 +22,12 @@ class Login extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: Image.asset("assets/branding-logo.png"),
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Image.asset(
+                      "assets/branding-logo-2.png",
+                      width: 300,
+                      height: 300,
+                    ),
                   ),
                   const LoginForm(),
                 ],

@@ -4,27 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:therock/extensions.dart';
 import 'package:therock/screens/user_screens/current_user/cu_local_widgets/cu_bmr/cu_bmi.dart';
-import 'package:therock/screens/user_screens/trainer/trainer_local_widgets/manage_gymuser_activities/manage_gymuser_activities.dart';
-import 'package:therock/screens/user_screens/trainer/trainer_local_widgets/trainer_showoff_profile/trainer_showoff_profile.dart';
-import 'package:therock/states/current_user.dart';
+import 'package:therock/screens/user_screens/current_user/cu_local_widgets/cu_bmr/cu_bmr_home.dart';
 import 'package:therock/utils/text_theme.dart';
-import 'package:provider/provider.dart';
 
-class TrainerShowoffProfileCard extends StatelessWidget {
-  const TrainerShowoffProfileCard({super.key});
+class BmrCard extends StatelessWidget {
+  const BmrCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = 0;
     screenWidth = MediaQuery.of(context).size.width;
 
-    CurrentUser currentUser = Provider.of<CurrentUser>(context, listen: false);
-
     return InkWell(
       onTap: () {
-        Get.to(() => TrainerShowoffProfile(
-              tid: currentUser.getCurrentUser.uid.toString(),
-            ));
+        Get.to(() => const CuBmr());
       },
       child: Stack(
         fit: StackFit.expand,
@@ -46,7 +39,7 @@ class TrainerShowoffProfileCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6.0),
               child: Image.asset(
-                'assets/image-icons/membership_icon.jpg',
+                'assets/image-icons/bmr_icon.jpeg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -59,7 +52,7 @@ class TrainerShowoffProfileCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Showoff Profile",
+                  "B M R",
                   style: ThemeTextGym.textShadowInHomePageCards,
                 ),
                 const SizedBox(height: 2),

@@ -525,6 +525,22 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                               'checkOut': DateFormat('hh:mm')
                                                   .format(DateTime.now()),
                                             });
+
+                                            //add inside the gym daily activity report
+                                            await FirebaseFirestore.instance
+                                                .collection("daily_activities")
+                                                .doc(DateFormat('dd MMMM yyyy')
+                                                    .format(DateTime.now()))
+                                                .collection("Attandance")
+                                                .doc(_user.uid)
+                                                .set({
+                                              'fullName': _user.fullName,
+                                              'email': _user.email,
+                                              'date': Timestamp.now(),
+                                              'checkIn': checkIn,
+                                              'checkOut': DateFormat('hh:mm')
+                                                  .format(DateTime.now()),
+                                            }, SetOptions(merge: true));
                                           } catch (e) {
                                             setState(() {
                                               checkIn = DateFormat('hh:mm')
@@ -542,6 +558,22 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                                   .format(DateTime.now()),
                                               'checkOut': "--/--",
                                             });
+
+                                            ///add inside the gym daily report collection
+                                            await FirebaseFirestore.instance
+                                                .collection("daily_activities")
+                                                .doc(DateFormat('dd MMMM yyyy')
+                                                    .format(DateTime.now()))
+                                                .collection("Attandance")
+                                                .doc(_user.uid)
+                                                .set({
+                                              'fullName': _user.fullName,
+                                              'email': _user.email,
+                                              'date': Timestamp.now(),
+                                              'checkIn': DateFormat('hh:mm')
+                                                  .format(DateTime.now()),
+                                              'checkOut': "--/--",
+                                            }, SetOptions(merge: true));
                                           }
                                         } else {
                                           scaffoldUtil(
@@ -743,6 +775,16 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                     'trainer': "",
                     'service': "",
                     'other': "",
+                    'uid': _user.uid,
+                    'email': _user.email,
+                    'fullName': _user.fullName,
+                    'currentMembershipName': _user.currentMembershipName,
+                    'hasTrainer': _user.trainnerName,
+                    'createdDate': DateTime.now(),
+                    'fullDate':
+                        DateFormat('dd MMMM yyyy').format(DateTime.now()),
+                    'month': DateFormat('MMMM').format(DateTime.now()),
+                    'year': DateFormat('yyyy').format(DateTime.now()),
                   });
                   setState(() {
                     showFeedBackSection = false;
@@ -871,6 +913,16 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                     'trainer': trainer,
                     'service': service,
                     'other': others,
+                    'uid': _user.uid,
+                    'email': _user.email,
+                    'fullName': _user.fullName,
+                    'currentMembershipName': _user.currentMembershipName,
+                    'hasTrainer': _user.trainnerName,
+                    'createdDate': DateTime.now(),
+                    'fullDate':
+                        DateFormat('dd MMMM yyyy').format(DateTime.now()),
+                    'month': DateFormat('MMMM').format(DateTime.now()),
+                    'year': DateFormat('yyyy').format(DateTime.now()),
                   });
                   setState(() {
                     showFeedBackSection = false;

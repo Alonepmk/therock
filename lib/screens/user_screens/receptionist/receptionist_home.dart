@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:therock/screens/user_screens/admin/admin_local_widgets/cms/manage_cms.dart';
-import 'package:therock/screens/user_screens/admin/admin_local_widgets/feed_back/manage_feed_back.dart';
-import 'package:therock/screens/user_screens/admin/admin_local_widgets/manage_gym_user/manage_gym_user_home.dart';
-import 'package:therock/screens/user_screens/admin/admin_local_widgets/manage_membership/manage_membership.dart';
-import 'package:therock/screens/user_screens/admin/admin_local_widgets/manage_program/manage_program.dart';
+import 'package:therock/screens/user_screens/receptionist/receptionist_local_widget/receptionist_manage_attandance.dart';
 import 'package:therock/utils/function_utils.dart';
 import 'package:therock/utils/navigator_stack.dart';
 
-class AdminHome extends StatefulWidget {
-  const AdminHome({super.key});
+class ReceptionistHome extends StatefulWidget {
+  const ReceptionistHome({super.key});
 
   @override
-  State<AdminHome> createState() => _AdminHomeState();
+  State<ReceptionistHome> createState() => _ReceptionistHomeState();
 }
 
-class _AdminHomeState extends State<AdminHome> {
+class _ReceptionistHomeState extends State<ReceptionistHome> {
   double screenWidth = 0;
   double screenHeight = 0;
   @override
@@ -23,18 +19,10 @@ class _AdminHomeState extends State<AdminHome> {
     screenWidth = MediaQuery.of(context).size.width;
 
     List<Widget> listItems = const [
-      ManageGymUser(),
-      ManageProgram(),
-      ManageMembership(),
-      ManageCms(),
-      ManageFeedBack(),
+      ReceptionistManageAttandance(),
     ];
     List labelString = const [
-      "Manage Gym User",
-      "Manage Program",
-      "Manage Membership",
-      "Manage Cms",
-      "Manage FeedBack"
+      "Manage Attandance",
     ];
     return Scaffold(
       body: SafeArea(

@@ -51,8 +51,8 @@ class _MemberProfileState extends State<MemberProfile> {
   void _initiateUserData() async {
     user = await GymUserDBService().getUserInfoByInitState();
 
-    fullNameController.text = user.fullName.toString();
-    addressController.text = user.address.toString();
+    fullNameController.text = user.fullName.toString().capitalize!;
+    addressController.text = user.address.toString().capitalize!;
     phoneNumberController.text = user.phoneNumber.toString();
 
     birth = user.dob.toString();
@@ -100,7 +100,7 @@ class _MemberProfileState extends State<MemberProfile> {
   Widget build(BuildContext context) {
     //CurrentUser cu = Provider.of<CurrentUser>(context, listen: true);
     screenHeight = MediaQuery.of(context).size.height;
-    screenWidth = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Column(
@@ -154,8 +154,19 @@ class _MemberProfileState extends State<MemberProfile> {
                     },
                   ),
                 ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.manage_accounts_sharp),
+                    color: Colors.white,
+                    tooltip: 'Account Settings',
+                    onPressed: () {
+                      showAccountSettingDialog();
+                    },
+                  ),
+                ),
                 Positioned(
-                  left: screenWidth / 40,
+                  left: screenHeight / 40,
                   top: screenHeight / 16,
                   child: GestureDetector(
                     onTap: () {
@@ -163,11 +174,11 @@ class _MemberProfileState extends State<MemberProfile> {
                     },
                     child: profilePic == ""
                         ? CircleAvatar(
-                            radius: screenWidth / 13.8,
+                            radius: screenHeight / 13.8,
                             child: Icon(
                               Icons.person,
                               color: Colors.white,
-                              size: screenWidth / 9.25,
+                              size: screenHeight / 9.25,
                             ),
                           )
                         : CachedNetworkImage(
@@ -185,7 +196,7 @@ class _MemberProfileState extends State<MemberProfile> {
                                 color: Colors.white,
                               ),
                               child: CircleAvatar(
-                                radius: screenWidth / 14,
+                                radius: screenHeight / 14,
                                 backgroundImage: imageProvider,
                               ),
                             ),
@@ -198,27 +209,27 @@ class _MemberProfileState extends State<MemberProfile> {
                 ),
                 Positioned(
                   top: screenHeight / 4,
-                  left: screenWidth / 40,
+                  left: screenHeight / 40,
                   child: Row(
                     children: [
                       Text(
                         "Profile",
                         style: TextStyle(
-                          fontSize: screenWidth / 36,
+                          fontSize: screenHeight / 36,
                           color: Colors.white,
                         ),
                       ),
                       Icon(
                         Icons.app_registration_outlined,
                         color: Colors.white,
-                        size: screenWidth / 36,
+                        size: screenHeight / 36,
                       ),
                     ],
                   ),
                 ),
                 Positioned(
-                  top: screenWidth / 10.5,
-                  left: screenWidth / 5.4,
+                  top: screenHeight / 10.5,
+                  left: screenHeight / 5.4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -227,12 +238,12 @@ class _MemberProfileState extends State<MemberProfile> {
                           Icon(
                             Icons.diamond_sharp,
                             color: Colors.white30,
-                            size: screenWidth / 50,
+                            size: screenHeight / 50,
                           ),
                           Text(
-                            " ${user.fullName.toString().toUpperCase()}",
+                            " ${user.fullName.toString().capitalize!}",
                             style: TextStyle(
-                              fontSize: screenWidth / 65,
+                              fontSize: screenHeight / 65,
                               color: Colors.white30,
                             ),
                           ),
@@ -243,12 +254,12 @@ class _MemberProfileState extends State<MemberProfile> {
                           Icon(
                             Icons.alternate_email_outlined,
                             color: Colors.white30,
-                            size: screenWidth / 50,
+                            size: screenHeight / 50,
                           ),
                           Text(
                             "${user.email}",
                             style: TextStyle(
-                              fontSize: screenWidth / 65,
+                              fontSize: screenHeight / 65,
                               color: Colors.white30,
                             ),
                           ),
@@ -263,7 +274,7 @@ class _MemberProfileState extends State<MemberProfile> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                  screenWidth / 22, screenWidth / 40, 0, screenWidth / 100),
+                  screenHeight / 22, screenHeight / 40, 0, screenHeight / 100),
               child: ListView(
                 children: [
                   const SizedBox(
@@ -276,7 +287,7 @@ class _MemberProfileState extends State<MemberProfile> {
                       Icon(
                         Icons.perm_identity,
                         color: Colors.white,
-                        size: screenWidth / 40,
+                        size: screenHeight / 40,
                       )),
                   textField(
                       user.address,
@@ -285,7 +296,7 @@ class _MemberProfileState extends State<MemberProfile> {
                       Icon(
                         Icons.location_on_outlined,
                         color: Colors.white,
-                        size: screenWidth / 40,
+                        size: screenHeight / 40,
                       )),
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -306,14 +317,13 @@ class _MemberProfileState extends State<MemberProfile> {
                         builder: (context, child) {
                           return Column(
                             children: <Widget>[
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: SizedBox(
-                                    height: screenHeight / 2,
-                                    width: screenWidth / 2,
-                                    child: child,
-                                  ),
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(top: screenHeight / 7.5),
+                                child: SizedBox(
+                                  height: screenHeight / 1.4,
+                                  width: screenWidth,
+                                  child: child,
                                 ),
                               ),
                             ],
@@ -349,14 +359,14 @@ class _MemberProfileState extends State<MemberProfile> {
                             Icon(
                               Icons.date_range_outlined,
                               color: Colors.white,
-                              size: screenWidth / 40,
+                              size: screenHeight / 40,
                             ),
                             const SizedBox(width: 16),
                             Text(
                               birth,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: screenWidth / 60,
+                                fontSize: screenHeight / 60,
                               ),
                             ),
                           ],
@@ -371,7 +381,7 @@ class _MemberProfileState extends State<MemberProfile> {
                       Icon(
                         Icons.phone_android,
                         color: Colors.white,
-                        size: screenWidth / 40,
+                        size: screenHeight / 40,
                       )),
                   GestureDetector(
                     onTap: () async {
@@ -390,29 +400,35 @@ class _MemberProfileState extends State<MemberProfile> {
                         scaffoldUtil(
                             context, "Please enter your phone number", 2);
                       } else {
-                        try {
-                          showLoadingDialogUtil(context);
-                          await FirebaseFirestore.instance
-                              .collection("users")
-                              .doc(user.uid)
-                              .update({
-                            'fullName': fullName,
-                            'address': address,
-                            'dob': birthDate,
-                            'phoneNumber': phoneNumber,
-                          }).then((value) {});
+                        if (phoneNumber.isNumericOnly) {
+                          try {
+                            showLoadingDialogUtil(context);
+                            await FirebaseFirestore.instance
+                                .collection("users")
+                                .doc(user.uid)
+                                .update({
+                              'fullName': fullName.toLowerCase(),
+                              'address': address.toLowerCase(),
+                              'dob': birthDate,
+                              'phoneNumber': phoneNumber,
+                            }).then((value) {});
 
-                          Navigator.pop(context);
-                          scaffoldUtil(context, "Data Successfully Updated", 2);
-                        } catch (e) {
-                          scaffoldUtil(context, "Error Updating Data", 2);
+                            Navigator.pop(context);
+                            scaffoldUtil(
+                                context, "Data Successfully Updated", 2);
+                          } catch (e) {
+                            scaffoldUtil(context, "Error Updating Data", 2);
+                          }
+                        } else {
+                          scaffoldUtil(
+                              context, "Phone Number Must be Numberic Only", 2);
                         }
                       }
                     },
                     child: Container(
                       height: kToolbarHeight - 22,
                       margin: EdgeInsets.fromLTRB(
-                          screenWidth / 4, screenWidth / 35, 0, 0),
+                          screenHeight / 4, screenHeight / 35, 0, 0),
                       padding: const EdgeInsets.only(left: 15),
                       decoration: BoxDecoration(
                         // boxShadow: <BoxShadow>[
@@ -429,7 +445,7 @@ class _MemberProfileState extends State<MemberProfile> {
                           Icon(
                             Icons.save_as_outlined,
                             color: Colors.white,
-                            size: screenWidth / 40,
+                            size: screenHeight / 40,
                           ),
                           const SizedBox(width: 12),
                           Center(
@@ -437,7 +453,7 @@ class _MemberProfileState extends State<MemberProfile> {
                               "Save Profile",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: screenWidth / 55,
+                                fontSize: screenHeight / 55,
                               ),
                             ),
                           ),
@@ -448,54 +464,6 @@ class _MemberProfileState extends State<MemberProfile> {
                 ],
               ),
             ),
-          ),
-          Column(
-            children: [
-              Text(
-                "Account Setting",
-                style: TextStyle(
-                  fontSize: screenWidth / 80,
-                  color: Colors.white,
-                ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.settings),
-                color: Colors.white,
-                tooltip: 'Log Out',
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: const Text('Confirmation'),
-                        content: const SingleChildScrollView(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: Text(
-                                      "!You sure want to Proceed to Account Setting?")),
-                            ],
-                          ),
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('No'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              Get.to(() => const AccountSetting());
-                            },
-                            child: const Text('Yes'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
           ),
         ],
       ),
@@ -529,7 +497,7 @@ class _MemberProfileState extends State<MemberProfile> {
           ),
           child: TextFormField(
             textAlignVertical: TextAlignVertical.bottom,
-            style: TextStyle(color: Colors.white, fontSize: screenWidth / 60),
+            style: TextStyle(color: Colors.white, fontSize: screenHeight / 60),
             controller: controller,
             cursorColor: Colors.white,
             maxLines: 1,
@@ -557,6 +525,39 @@ class _MemberProfileState extends State<MemberProfile> {
           ),
         ),
       ],
+    );
+  }
+
+  void showAccountSettingDialog() {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Confirmation'),
+          content: const SingleChildScrollView(
+            child: Row(
+              children: [
+                Expanded(
+                    child:
+                        Text("!You sure want to Proceed to Account Setting?")),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Get.to(() => const AccountSetting());
+              },
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

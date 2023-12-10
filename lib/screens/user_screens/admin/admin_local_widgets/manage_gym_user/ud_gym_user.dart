@@ -3,9 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:therock/models/gym_user.dart';
 import 'package:therock/models/gym_user_roles.dart';
 import 'package:therock/models/membership.dart';
+import 'package:therock/screens/user_screens/admin/admin_local_widgets/manage_bmr/manage_bmr.dart';
 import 'package:therock/services/gym_user_db_service.dart';
 import 'package:therock/utils/loading_dialog.dart';
 import 'package:therock/utils/one_message_scaffold.dart';
@@ -48,6 +50,7 @@ class _AdminCrudGymUserState extends State<AdminCrudGymUser> {
     describeEnum(GymUserRole.pastUser),
     describeEnum(GymUserRole.trainer),
     describeEnum(GymUserRole.guest),
+    describeEnum(GymUserRole.receptionist),
   ];
 
   @override
@@ -778,6 +781,80 @@ class _AdminCrudGymUserState extends State<AdminCrudGymUser> {
                           ),
                         )
                       : Container(),
+                  SizedBox(height: 20),
+                  BoxContainerUtil(
+                    child: SizedBox(
+                      width: screenWidth,
+                      child: Column(
+                        children: [
+                          Text("Manage BMR Record"),
+                          SizedBox(height: 10),
+                          InkWell(
+                            onTap: () {
+                              Get.to(
+                                () => ManageBmr(
+                                  gymUser: GymUser(
+                                    uid: widget.gymUser.uid,
+                                    email: widget.gymUser.email,
+                                    fullName: widget.gymUser.fullName,
+                                    address: widget.gymUser.address,
+                                    phoneNumber: widget.gymUser.phoneNumber,
+                                    profilePicLink:
+                                        widget.gymUser.profilePicLink,
+                                    dob: widget.gymUser.dob,
+                                    role: widget.gymUser.role,
+                                    trainnerUid: widget.gymUser.trainnerUid,
+                                    trainnerName: widget.gymUser.trainnerName,
+                                    pid: widget.gymUser.pid,
+                                    programName: widget.gymUser.programName,
+                                    currentMembershipId:
+                                        widget.gymUser.currentMembershipId,
+                                    currentMembershipName:
+                                        widget.gymUser.currentMembershipName,
+                                    hasCurrentMembership:
+                                        widget.gymUser.hasCurrentMembership,
+                                    membershipStartDate:
+                                        widget.gymUser.membershipStartDate,
+                                    membershipEndDate:
+                                        widget.gymUser.membershipEndDate,
+                                    isLogin: widget.gymUser.isLogin,
+                                    accountCreated:
+                                        widget.gymUser.accountCreated,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 160,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.green,
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.add_task_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Manage BMR",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
