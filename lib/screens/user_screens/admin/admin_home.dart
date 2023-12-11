@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therock/screens/user_screens/admin/admin_local_widgets/cms/manage_cms.dart';
+//import 'package:therock/screens/user_screens/admin/admin_local_widgets/export_excel/manage_export_excel.dart';
 import 'package:therock/screens/user_screens/admin/admin_local_widgets/feed_back/manage_feed_back.dart';
 import 'package:therock/screens/user_screens/admin/admin_local_widgets/manage_gym_user/manage_gym_user_home.dart';
 import 'package:therock/screens/user_screens/admin/admin_local_widgets/manage_membership/manage_membership.dart';
@@ -28,13 +29,15 @@ class _AdminHomeState extends State<AdminHome> {
       ManageMembership(),
       ManageCms(),
       ManageFeedBack(),
+      //ManageExportExcel(),
     ];
     List labelString = const [
       "Manage Gym User",
       "Manage Program",
       "Manage Membership",
       "Manage Cms",
-      "Manage FeedBack"
+      "Manage FeedBack",
+      //"Manage Export Excel"
     ];
     return Scaffold(
       body: SafeArea(

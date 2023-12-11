@@ -67,6 +67,7 @@ dependencies:
   url_launcher: ^6.1.14
   email_auth: ^1.1.1
   mailer: ^6.0.1
+  excel: ^4.0.0
 
 flutter_native_splash:
   color: "#141414"
