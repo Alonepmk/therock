@@ -51,7 +51,7 @@ class _TestlocState extends State<Testloc> {
         child: Column(
           children: [
             Text(
-                "Member Profile ${context.watch<CurrentUser>().getCurrentBottomNavigationBarIndex}"),
+                "Members Profiles cc ${context.watch<CurrentUser>().getCurrentBottomNavigationBarIndex}"),
             Center(
               child: ElevatedButton(
                   child: const Text("Sign Out"),
@@ -134,22 +134,22 @@ class _TestlocState extends State<Testloc> {
     if (permission == LocationPermission.deniedForever) {
       return Future.error("location permission denied forever");
     }
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
+    return await Geolocator.getLastKnownPosition();
   }
 
   void getAddressFromLatLong(Position datas) async {
-    double startLatitude = 19.8047249;
-    double startLongitude = 96.1534415;
+    var datas = await Geolocator.getCurrentPosition();
+    double startLatitude = 19.7052466;
+    double startLongitude = 96.1314091;
     //print("i was here to test out things");
     List<Placemark> placemark =
         await placemarkFromCoordinates(datas.latitude, datas.longitude);
-    //print(" The latitude and Langitude ${datas.latitude}   ${datas.longitude}");
+    print(" The latitude and Langitude ${datas.latitude}   ${datas.longitude}");
     double test = Geolocator.distanceBetween(
         startLatitude, startLongitude, datas.latitude, datas.longitude);
 
     test2 = "distance: ${(test * 3.28084).toStringAsFixed(0)} feet";
-    //print("distance: ${(test * 3.28084).toStringAsFixed(0)} feet");
+    print("distance: ${(test * 3.28084).toStringAsFixed(0)} feet");
 
     Placemark place = placemark[0];
     var address =

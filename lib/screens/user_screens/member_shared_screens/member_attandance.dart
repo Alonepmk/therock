@@ -403,7 +403,7 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                         //print("the distance in meter ${distanceInmeter}     ${distanceInfeet}");
                                         // end of calculation
                                         //if (distanceInfeet < 60) {
-                                        if (distanceInfeet < 99999999999999) {
+                                        if (distanceInfeet < 60) {
                                           Timer(const Duration(seconds: 1), () {
                                             key.currentState
                                                 ?.reset(); // this recall the slider
