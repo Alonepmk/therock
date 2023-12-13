@@ -69,7 +69,7 @@ class _ViewTrainerDetailState extends State<ViewTrainerDetail> {
           child: Column(
             children: [
               Container(
-                height: screenHeight / 4,
+                height: screenHeight / 3.5,
                 margin: const EdgeInsets.only(top: 8),
                 width: double.maxFinite,
                 child: Column(

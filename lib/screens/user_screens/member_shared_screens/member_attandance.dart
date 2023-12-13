@@ -400,7 +400,7 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                         double distanceInfeet =
                                             distanceInmeter * 3.28084;
 
-                                        //print("the distance in meter ${distanceInmeter}     ${distanceInfeet}");
+                                       // print("the distance in blah blah meter ${distanceInmeter}     ${distanceInfeet}");
                                         // end of calculation
                                         //if (distanceInfeet < 60) {
                                         if (distanceInfeet < 201) {
