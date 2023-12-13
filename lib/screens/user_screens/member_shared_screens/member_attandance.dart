@@ -403,7 +403,7 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                         //print("the distance in meter ${distanceInmeter}     ${distanceInfeet}");
                                         // end of calculation
                                         //if (distanceInfeet < 60) {
-                                        if (distanceInfeet < 200) {
+                                        if (distanceInfeet < 201) {
                                           Timer(const Duration(seconds: 1), () {
                                             key.currentState
                                                 ?.reset(); // this recall the slider
@@ -450,26 +450,7 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                                     .toString()) >
                                                 0) {
                                               String currentProgramIndex;
-                                              // if (_user.didCheckOutYesterday ==
-                                              //     "no") {
-                                              //   currentProgramIndex = _user
-                                              //       .currentProgramIndex
-                                              //       .toString();
-                                              // } else {
-                                              //   if (_user.currentProgramIndex
-                                              //           .toString() ==
-                                              //       _user.programCount
-                                              //           .toString()) {
-                                              //     currentProgramIndex = "1";
-                                              //   } else {
-                                              //     currentProgramIndex =
-                                              //         (int.parse(_user
-                                              //                     .currentProgramIndex
-                                              //                     .toString()) +
-                                              //                 1)
-                                              //             .toString();
-                                              //   }
-                                              // }
+
                                               if (_user.currentProgramIndex
                                                       .toString() ==
                                                   _user.programCount

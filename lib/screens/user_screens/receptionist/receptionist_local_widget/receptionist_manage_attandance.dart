@@ -550,7 +550,43 @@ class _ReceptionistManageAttandanceState
                                 showLoadingDialogUtil(context);
                                 if (selectedUser.role == "currentUser" ||
                                     selectedUser.role == "trainer") {
-                                  
+                                  //Start of Incrementing the current index if the user forget to check out yesterday
+                                  if (int.parse(selectedUser.programCount
+                                          .toString()) >
+                                      0) {
+                                    String currentProgramIndex;
+
+                                    if (selectedUser.didCheckOutYesterday
+                                            .toString() ==
+                                        "no") {
+                                      if (selectedUser.currentProgramIndex
+                                              .toString() ==
+                                          selectedUser.programCount
+                                              .toString()) {
+                                        currentProgramIndex = "1";
+                                      } else {
+                                        currentProgramIndex = (int.parse(
+                                                    selectedUser
+                                                        .currentProgramIndex
+                                                        .toString()) +
+                                                1)
+                                            .toString();
+                                      }
+                                    } else {
+                                      currentProgramIndex = selectedUser
+                                          .currentProgramIndex
+                                          .toString();
+                                    }
+
+                                    //print("the current program index at check in ${currentProgramIndex}");
+                                    await GymUserDBService
+                                        .updateUserProgramIndex(
+                                            selectedUser.uid,
+                                            currentProgramIndex,
+                                            "no");
+                                  }
+                                  //End of Incrementing
+
                                   //add attandance record for user collection
                                   await FirebaseFirestore.instance
                                       .collection("users")
@@ -609,6 +645,34 @@ class _ReceptionistManageAttandanceState
                                   showLoadingDialogUtil(context);
                                   if (selectedUser.role == "currentUser" ||
                                       selectedUser.role == "trainer") {
+                                    //Start of incrementing check out
+                                    if (int.parse(selectedUser.programCount
+                                            .toString()) >
+                                        0) {
+                                      String currentProgramIndex;
+
+                                      if (selectedUser.currentProgramIndex
+                                              .toString() ==
+                                          selectedUser.programCount
+                                              .toString()) {
+                                        currentProgramIndex = "1";
+                                      } else {
+                                        currentProgramIndex = (int.parse(
+                                                    selectedUser
+                                                        .currentProgramIndex
+                                                        .toString()) +
+                                                1)
+                                            .toString();
+                                      }
+                                      //print("the current program index at check out ${currentProgramIndex}");
+                                      await GymUserDBService
+                                          .updateUserProgramIndex(
+                                              selectedUser.uid,
+                                              currentProgramIndex,
+                                              "yes");
+                                    }
+                                    // End of Incrementing
+
                                     //add attandance record for user collection
                                     await FirebaseFirestore.instance
                                         .collection("users")
@@ -685,6 +749,31 @@ class _ReceptionistManageAttandanceState
                 IconButton(
                   onPressed: () async {
                     showLoadingDialogUtil(context);
+
+                    DocumentSnapshot snap = await FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(uid)
+                        .get();
+                    if (snap.data() != null) {
+                      //Start of incrementing check out
+                      if (int.parse(snap["programCount"].toString()) > 0) {
+                        String currentProgramIndex;
+
+                        if (snap["currentProgramIndex"].toString() ==
+                            snap["programCount"].toString()) {
+                          currentProgramIndex = "1";
+                        } else {
+                          currentProgramIndex = (int.parse(
+                                      snap["currentProgramIndex"].toString()) +
+                                  1)
+                              .toString();
+                        }
+                        //print("the current program index at check out ${currentProgramIndex}");
+                        await GymUserDBService.updateUserProgramIndex(
+                            snap["uid"], currentProgramIndex, "yes");
+                      }
+                      // End of Incrementing
+                    }
                     //add attandance record for user collection
                     await FirebaseFirestore.instance
                         .collection("users")
