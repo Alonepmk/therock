@@ -139,8 +139,8 @@ class _TestlocState extends State<Testloc> {
 
   void getAddressFromLatLong(Position datas) async {
     var datas = await Geolocator.getCurrentPosition();
-    double startLatitude = 19.7052466;
-    double startLongitude = 96.1314091;
+    double startLatitude = 19.7048945;
+    double startLongitude = 96.1313855;
     //print("i was here to test out things");
     List<Placemark> placemark =
         await placemarkFromCoordinates(datas.latitude, datas.longitude);
@@ -149,7 +149,7 @@ class _TestlocState extends State<Testloc> {
         startLatitude, startLongitude, datas.latitude, datas.longitude);
 
     test2 = "distance: ${(test * 3.28084).toStringAsFixed(0)} feet";
-    print("distance: ${(test * 3.28084).toStringAsFixed(0)} feet");
+    print("distance: ${(test * 3.28084).toStringAsFixed(0)} feet ${test2} m");
 
     Placemark place = placemark[0];
     var address =

@@ -550,6 +550,7 @@ class _ReceptionistManageAttandanceState
                                 showLoadingDialogUtil(context);
                                 if (selectedUser.role == "currentUser" ||
                                     selectedUser.role == "trainer") {
+                                  
                                   //add attandance record for user collection
                                   await FirebaseFirestore.instance
                                       .collection("users")

@@ -382,8 +382,8 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                         // To check if the user is in the building
                                         //double startLatitude = 19.8047249;
                                         //double startLongitude = 96.1534415;
-                                        double startLatitude = 19.7052466;
-                                        double startLongitude = 96.1314091;
+                                        double startLatitude = 19.7048945;
+                                        double startLongitude = 96.1313855;
 
                                         var datas =
                                             await Geolocator.getCurrentPosition(
@@ -403,7 +403,7 @@ class _MemberAttandanceState extends State<MemberAttandance> {
                                         //print("the distance in meter ${distanceInmeter}     ${distanceInfeet}");
                                         // end of calculation
                                         //if (distanceInfeet < 60) {
-                                        if (distanceInfeet < 60) {
+                                        if (distanceInfeet < 200) {
                                           Timer(const Duration(seconds: 1), () {
                                             key.currentState
                                                 ?.reset(); // this recall the slider
