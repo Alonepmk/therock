@@ -770,7 +770,7 @@ class _ReceptionistManageAttandanceState
                         }
                         //print("the current program index at check out ${currentProgramIndex}");
                         await GymUserDBService.updateUserProgramIndex(
-                            snap["uid"], currentProgramIndex, "yes");
+                            uid, currentProgramIndex, "yes");
                       }
                       // End of Incrementing
                     }

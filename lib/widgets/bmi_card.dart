@@ -17,7 +17,7 @@ class BmiCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.to(() => const Testloc());
+        Get.to(() => const CuBmi());
       },
       child: Stack(
         fit: StackFit.expand,
